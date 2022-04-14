@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import s from './Form.module.css';
 import shortid from 'shortid';
+import PropTypes from 'prop-types';
 
 class Form extends Component {
   state = {
     name: '',
     number: '',
+  };
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
   };
 
   nameInputId = shortid.generate();
