@@ -14,7 +14,23 @@ class App extends Component {
   };
 
   formSubmitHandler = data => {
-    console.log(data);
+    const { contacts } = this.state;
+    const normalizedName = data.name.toLocaleLowerCase().split(' ').join('');
+    const ableToAddName = contacts.some(
+      contact =>
+        contact.name.toLocaleLowerCase().split(' ').join('') === normalizedName
+    );
+    const normalizedNumber = data.number.split('-').join('');
+    const ableToAddNumber = contacts.some(
+      contact => contact.number.split('-').join('') === normalizedNumber
+    );
+    if (ableToAddName || ableToAddNumber) {
+      alert(
+        `${ableToAddName ? data.name : data.number} is already in contacts`
+      );
+      return;
+    }
+    this.addContact(data);
   };
 
   addContact = contactNew => {
@@ -55,10 +71,7 @@ class App extends Component {
     return (
       <div className={s.wrapper}>
         <h1 className={s.title}>Phonebook</h1>
-        <Form
-          onSubmit={this.formSubmitHandler}
-          onAddContact={this.addContact}
-        />
+        <Form onSubmit={this.formSubmitHandler} />
         <h1 className={s.title}>Contacts</h1>
         <Filter value={filter} onChangeFilter={this.changeFilter} />
         <ContactsList
