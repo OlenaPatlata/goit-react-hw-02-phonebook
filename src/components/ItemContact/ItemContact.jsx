@@ -4,11 +4,17 @@ import s from './ItemContact.module.css';
 const ItemContact = props => {
   const { contact, onDeleteContact } = props;
   return (
-    <li className={s.item}>
-      <span className={s.text}>{contact.name}:</span>
-      <span className={s.text}>{contact.number}</span>
-      <button type="button" onClick={onDeleteContact}>
-        Удалить
+    <li className={s.item} id={contact.id}>
+      <p className={s.text}>
+        {contact.name}: {contact.number}
+      </p>
+      <button
+        id={contact.id}
+        type="button"
+        onClick={onDeleteContact}
+        className={s.btn}
+      >
+        Delete
       </button>
     </li>
   );

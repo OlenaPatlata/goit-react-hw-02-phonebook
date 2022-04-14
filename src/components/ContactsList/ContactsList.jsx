@@ -1,25 +1,23 @@
-import React, { Component } from 'react';
-// import s from './ContactsList.module.css';
+import React from 'react';
+import s from './ContactsList.module.css';
 import ItemContact from 'components/ItemContact/ItemContact';
 
 const ContactsList = props => {
-  const { contacts, onDeleteContact } = props;
+  const { vizibleContacts, onDeleteContact } = props;
+
   return (
-    <ul>
-      {/* {contacts.map(contact => {
-        return <ItemContact key={contact.id} contact={contact} />;
-      })} */}
+    <ul className={s.list}>
+      {vizibleContacts?.length
+        ? vizibleContacts.map(contact => (
+            <ItemContact
+              key={contact.id}
+              contact={contact}
+              onDeleteContact={onDeleteContact}
+            />
+          ))
+        : ''}
     </ul>
   );
 };
 
 export default ContactsList;
-
-// class ContactsList extends Component {
-//   state = {};
-
-//   render() {
-//     return <></>;
-//   }
-// }
-// export default ContactsList;
